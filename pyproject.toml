@@ -1,0 +1,25 @@
+[project]
+name = "codon_optimisation"
+version = "0.0.1"
+authors = [
+    { name = "Suzanne Scott" }
+]
+description = "A command line tool for codon optimisation"
+readme = "README.md"
+requires-python = ">3.8"
+dependencies = [
+    "biopython >= 1.83",
+    "typer >= 0.12.3"
+]
+
+[project.scripts]
+codon_optimise = "codon_optimisation.cli:app"
+
+[build-system]
+requires = [
+    "hatchling >= 1.26",
+    ]
+build-backend = "hatchling.build"
+
+[tool.hatch.build]
+sources = ["src"]
