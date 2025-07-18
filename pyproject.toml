@@ -15,6 +15,14 @@ dependencies = [
 [project.scripts]
 codon_optimise = "codon_optimisation.cli:app"
 
+[project.optional-dependencies]
+test = [
+    "pytest >= 7.0",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+
 [build-system]
 requires = [
     "hatchling >= 1.26",
