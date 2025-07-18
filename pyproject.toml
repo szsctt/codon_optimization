@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-codon_optimise = "codon_optimisation.cli:app"
+co = "codon_optimisation.cli:app"
 
 [project.optional-dependencies]
 test = [

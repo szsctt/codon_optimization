@@ -1,10 +1,12 @@
 import typer
 from .codon_optimise import codon_optimise
+from .check import check_optimised_sequences
+from .gc import check_gc_content
 
 app = typer.Typer()
 
 @app.command()
-def main(
+def opt(
     # Add your command arguments here
     input_file: str = typer.Argument(..., help="Input sequence file"),
     output_file: str = typer.Option(None, help="Output file (default: stdout)"),
@@ -20,6 +22,27 @@ def main(
 ):
     """Optimize codons for a given sequence."""
     codon_optimise(input_file, type, before, after, avoid, output_file)
+
+@app.command()
+def check(
+    reference_file: str = typer.Argument(..., help="Reference fasta file containing original sequences"),
+    optimised_files: list[str] = typer.Argument(..., help="One or more optimised fasta files to check"),
+):
+    """
+    Check optimised sequences against reference.
+    Compares one or more optimised sequence files against a reference file.
+    """
+    check_optimised_sequences(reference_file, optimised_files)
+
+@app.command()
+def gc(
+    seq: str = typer.Argument(..., help="Fasta file containing sequence to check GC content"),
+):
+    """
+    Calculate GC content of a sequence.
+    """
+    gc = check_gc_content(seq)
+    typer.echo(f"GC content: {gc:.2f}%")
 
 if __name__ == "__main__":
     app()
